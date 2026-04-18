@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — My App</title>
+  <meta name="description" content="Latest posts from My App.">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="wl-nav" aria-label="Main navigation">
+    <a href="/index.html"><strong>My App</strong></a>
+    <a href="/blog.html">Blog</a>
+    <a href="/about.html">About</a>
+    <div class="wl-theme-toggle" data-island="/js/islands/theme-toggle.js" data-hydrate="idle">
+      <button type="button" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="page">
+      <h1>Blog</h1>
+
+      <article class="post-preview">
+        <h2><a href="/blog/hello-world.html">Hello World</a></h2>
+        <time datetime="2026-01-15">January 15, 2026</time>
+        <p>Your first blog post. Edit or replace this file to get started.</p>
+      </article>
+
+      <article class="post-preview">
+        <h2><a href="/blog/getting-started.html">Getting Started with Weblisk</a></h2>
+        <time datetime="2026-01-01">January 1, 2026</time>
+        <p>Learn how to build fast, modern websites with zero dependencies.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wl-footer">
+    Built with <a href="https://weblisk.dev">Weblisk</a> &middot; &copy; <span class="wl-year"></span>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+  <script>document.querySelectorAll('.wl-year').forEach(el=>el.textContent=new Date().getFullYear())</script>
+</body>
+</html>

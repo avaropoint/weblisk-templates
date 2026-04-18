@@ -2,27 +2,27 @@
   "version": "2.0.0",
   "description": "Official Weblisk project templates — plain HTML/CSS/JS, no build step required",
 
-  "scaffold": {
-    "default": {
-      "description": "Minimal starter — home page and 404",
-      "path": "scaffold/default/"
-    },
-    "blog": {
-      "description": "Blog starter with posts and about page",
-      "path": "scaffold/blog/"
-    },
-    "dashboard": {
-      "description": "Dashboard app with settings panel",
-      "path": "scaffold/dashboard/"
-    },
-    "docs": {
-      "description": "Documentation site with sidebar navigation",
-      "path": "scaffold/docs/"
-    }
+  "defaults": {
+    "name": "My App",
+    "cdn": "https://cdn.weblisk.dev/"
   },
 
-  "init": {
-    "env": { "dest": ".env", "file": "init/env" },
-    "gitignore": { "dest": ".gitignore", "file": "init/gitignore" }
+  "templates": {
+    "default": {
+      "description": "Minimal starter with a counter island — the base for every new project",
+      "path": "default/"
+    },
+    "blog": {
+      "description": "Blog with posts, about page, dark mode, and RSS-ready markup",
+      "path": "blog/"
+    },
+    "dashboard": {
+      "description": "Admin dashboard with stat cards, settings form, and live counter",
+      "path": "dashboard/"
+    },
+    "docs": {
+      "description": "Documentation site with sidebar navigation and dark mode",
+      "path": "docs/"
+    }
   }
 }

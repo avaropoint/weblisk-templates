@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — My App</title>
+  <meta name="description" content="Application settings.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="wl-nav" aria-label="Main navigation">
+    <a href="/index.html"><strong>My App</strong></a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/settings.html">Settings</a>
+    <div class="wl-theme-toggle" data-island="/js/islands/theme-toggle.js" data-hydrate="idle">
+      <button type="button" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="page">
+      <h1>Settings</h1>
+
+      <form class="settings-form" onsubmit="return false">
+        <fieldset>
+          <legend>Profile</legend>
+
+          <label for="display-name">Display Name</label>
+          <input id="display-name" type="text" placeholder="Your name" autocomplete="name">
+
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+        </fieldset>
+
+        <fieldset>
+          <legend>Preferences</legend>
+
+          <label for="language">Language</label>
+          <select id="language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+        </fieldset>
+
+        <button type="submit" class="btn">Save Settings</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="wl-footer">
+    Built with <a href="https://weblisk.dev">Weblisk</a> &middot; &copy; <span class="wl-year"></span>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+  <script>document.querySelectorAll('.wl-year').forEach(el=>el.textContent=new Date().getFullYear())</script>
+</body>
+</html>
