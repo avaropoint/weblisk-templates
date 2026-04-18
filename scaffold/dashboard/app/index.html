@@ -3,37 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found — {{.Name}}</title>
-  <meta name="description" content="The requested page could not be found.">
+  <title>My App</title>
+  <meta name="description" content="Welcome to My App, built with Weblisk.">
   <meta name="theme-color" content="#3B4F7C">
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
   <script type="importmap">
-  { "imports": { "weblisk": "{{.CDNBase}}weblisk.js", "weblisk/": "{{.CDNBase}}" } }
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/v1/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/v1/" } }
   </script>
 </head>
 <body>
 
   <a href="#main-content" class="wl-skip-link">Skip to main content</a>
   <nav style="padding:1rem;border-bottom:1px solid #ddd;display:flex;gap:1rem" aria-label="Main navigation">
-    <a href="/index.html"><strong>{{.Name}}</strong></a>
-    <a href="/about.html">About</a>
+    <a href="/index.html"><strong>My App</strong></a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/settings.html">Settings</a>
   </nav>
 
   <main id="main-content">
-    <section class="page page-404">
-      <div class="error-block">
-        <h1>404</h1>
-        <p>The page you're looking for doesn't exist.</p>
-        <a href="/index.html" class="btn">Go Home &rarr;</a>
-      </div>
+    <section class="page">
+      <h1>Welcome to My App</h1>
+      <p>Your Weblisk app is running. Edit <code>app/index.html</code> to start building.</p>
     </section>
   </main>
 
   <footer style="padding:1rem;text-align:center;color:#666;font-size:0.85rem">
-    Built with Weblisk &middot; &copy; {{.Year}}
+    Built with Weblisk &middot; &copy; <span class="wl-year"></span>
   </footer>
 
   <script type="module" src="/js/islands/shell.js"></script>
+  <script>document.querySelectorAll('.wl-year').forEach(el=>el.textContent=new Date().getFullYear())</script>
 </body>
 </html>

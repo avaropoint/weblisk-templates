@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "description": "Official Weblisk project templates — plain HTML/CSS/JS, no build step required",
+
+  "defaults": {
+    "name": "My App",
+    "cdn": "https://cdn.weblisk.dev/v1/"
+  },
+
+  "scaffold": {
+    "default": {
+      "description": "Minimal starter — home page and 404",
+      "path": "scaffold/default/"
+    },
+    "blog": {
+      "description": "Blog starter with posts and about page",
+      "path": "scaffold/blog/"
+    },
+    "dashboard": {
+      "description": "Dashboard app with settings panel",
+      "path": "scaffold/dashboard/"
+    },
+    "docs": {
+      "description": "Documentation site with sidebar navigation",
+      "path": "scaffold/docs/"
+    }
+  },
+
+  "pages": {
+    "blank": {
+      "description": "Empty page with Weblisk import map",
+      "file": "pages/blank.html"
+    }
+  },
+
+  "islands": {
+    "starter": {
+      "description": "Minimal island component scaffold",
+      "file": "islands/starter.js"
+    }
+  },
+
+  "init": {
+    "env": { "dest": ".env", "file": "init/env" },
+    "gitignore": { "dest": ".gitignore", "file": "init/gitignore" }
+  }
+}

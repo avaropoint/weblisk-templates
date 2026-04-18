@@ -46,35 +46,6 @@ self.addEventListener('message', (event) => {
 });
 
 async function replayMutations(tag) {
-  const db = await new Promise((res, rej) => {
-    const req = indexedDB.open('wl-sync-queue', 1);
-    req.onupgradeneeded = () => {
-      const db = req.result;
-      if (!db.objectStoreNames.contains('mutations')) {
-        const s = db.createObjectStore('mutations', { keyPath: 'id', autoIncrement: true });
-        s.createIndex('tag', 'tag'); s.createIndex('timestamp', 'timestamp');
-      }
-    };
-    req.onsuccess = () => res(req.result);
-    req.onerror = () => rej(req.error);
-  });
-  const tx = db.transaction('mutations', 'readonly');
-  const items = await new Promise((res, rej) => {
-    const r = tx.objectStore('mutations').index('tag').getAll(tag);
-    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
-  });
-  for (const item of items) {
-    try {
-      const resp = await fetch(item.url, {
-        method: item.method || 'POST',
-        headers: item.headers || { 'Content-Type': 'application/json' },
-        body: item.body ? JSON.stringify(item.body) : undefined,
-      });
-      if (resp.ok || resp.status < 500) {
-        const del = db.transaction('mutations', 'readwrite');
-        del.objectStore('mutations').delete(item.id);
-        await new Promise(r => { del.oncomplete = r; });
-      } else break;
-    } catch { break; }
-  }
+  // Placeholder: implement offline mutation replay
+  console.log('[sw] replay mutations for', tag);
 }
