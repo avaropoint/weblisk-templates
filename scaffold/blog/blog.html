@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Documentation — My App</title>
-  <meta name="description" content="Getting started with My App.">
+  <title>Blog — My App</title>
+  <meta name="description" content="Latest posts from My App.">
   <meta name="theme-color" content="#3B4F7C">
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
   <script type="importmap">
-  { "imports": { "weblisk": "https://cdn.weblisk.dev/v1/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/v1/" } }
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
   </script>
 </head>
 <body>
@@ -18,21 +18,16 @@
   <nav style="padding:1rem;border-bottom:1px solid #ddd;display:flex;gap:1rem" aria-label="Main navigation">
     <a href="/index.html"><strong>My App</strong></a>
     <a href="/about.html">About</a>
-    <a href="/docs.html">Docs</a>
+    <a href="/blog.html">Blog</a>
   </nav>
 
   <main id="main-content">
-    <section class="page" style="display:grid;grid-template-columns:220px 1fr;gap:2rem">
-      <aside style="border-right:1px solid #ddd;padding-right:1rem">
-        <nav aria-label="Documentation">
-          <h3 style="font-size:0.85rem;text-transform:uppercase;color:#666;margin-bottom:0.5rem">Getting Started</h3>
-          <a href="/docs.html" style="display:block;padding:0.25rem 0">Introduction</a>
-        </nav>
-      </aside>
+    <section class="page">
+      <h1>Blog</h1>
       <article>
-        <h1>Introduction</h1>
-        <p>Welcome to the <strong>My App</strong> documentation.</p>
-        <p>Use the sidebar to navigate between sections.</p>
+        <h2><a href="/blog/hello-world.html">Hello World</a></h2>
+        <time datetime="2026-01-01">January 1, 2026</time>
+        <p>Your first blog post. Edit or replace this file.</p>
       </article>
     </section>
   </main>

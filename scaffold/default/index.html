@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — My App</title>
-  <meta name="description" content="Application dashboard.">
-  <meta name="robots" content="noindex">
+  <title>My App</title>
+  <meta name="description" content="Welcome to My App, built with Weblisk.">
   <meta name="theme-color" content="#3B4F7C">
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
   <script type="importmap">
-  { "imports": { "weblisk": "https://cdn.weblisk.dev/v1/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/v1/" } }
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
   </script>
 </head>
 <body>
@@ -18,27 +17,13 @@
   <a href="#main-content" class="wl-skip-link">Skip to main content</a>
   <nav style="padding:1rem;border-bottom:1px solid #ddd;display:flex;gap:1rem" aria-label="Main navigation">
     <a href="/index.html"><strong>My App</strong></a>
-    <a href="/dashboard.html">Dashboard</a>
-    <a href="/settings.html">Settings</a>
+    <a href="/about.html">About</a>
   </nav>
 
   <main id="main-content">
     <section class="page">
-      <h1>Dashboard</h1>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;padding:1rem 0">
-        <div style="padding:1.5rem;border:1px solid #ddd;border-radius:8px">
-          <h2>Users</h2>
-          <p style="font-size:2rem;font-weight:700">1,234</p>
-        </div>
-        <div style="padding:1.5rem;border:1px solid #ddd;border-radius:8px">
-          <h2>Revenue</h2>
-          <p style="font-size:2rem;font-weight:700">$45,678</p>
-        </div>
-        <div style="padding:1.5rem;border:1px solid #ddd;border-radius:8px">
-          <h2>Active Sessions</h2>
-          <p style="font-size:2rem;font-weight:700">89</p>
-        </div>
-      </div>
+      <h1>Welcome to My App</h1>
+      <p>Your Weblisk app is running. Edit <code>app/index.html</code> to start building.</p>
     </section>
   </main>
 

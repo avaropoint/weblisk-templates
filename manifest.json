@@ -4,7 +4,7 @@
 
   "defaults": {
     "name": "My App",
-    "cdn": "https://cdn.weblisk.dev/v1/"
+    "cdn": "https://cdn.weblisk.dev/"
   },
 
   "scaffold": {

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — My App</title>
-  <meta name="description" content="About this application.">
+  <title>Page Not Found — My App</title>
+  <meta name="description" content="The requested page could not be found.">
   <meta name="theme-color" content="#3B4F7C">
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
   <script type="importmap">
-  { "imports": { "weblisk": "https://cdn.weblisk.dev/v1/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/v1/" } }
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
   </script>
 </head>
 <body>
@@ -18,13 +18,15 @@
   <nav style="padding:1rem;border-bottom:1px solid #ddd;display:flex;gap:1rem" aria-label="Main navigation">
     <a href="/index.html"><strong>My App</strong></a>
     <a href="/about.html">About</a>
-    <a href="/blog.html">Blog</a>
   </nav>
 
   <main id="main-content">
-    <section class="page">
-      <h1>About</h1>
-      <p>This app was built with <strong>Weblisk</strong> — a zero-dependency, zero-build-step framework.</p>
+    <section class="page page-404">
+      <div class="error-block">
+        <h1>404</h1>
+        <p>The page you're looking for doesn't exist.</p>
+        <a href="/index.html" class="btn">Go Home &rarr;</a>
+      </div>
     </section>
   </main>
 

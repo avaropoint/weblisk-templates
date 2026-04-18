@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — My App</title>
-  <meta name="description" content="Latest posts from My App.">
+  <title>My App</title>
+  <meta name="description" content="Welcome to My App, built with Weblisk.">
   <meta name="theme-color" content="#3B4F7C">
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.dataset.theme=localStorage.getItem('wl-theme')||'light'</script>
   <script type="importmap">
-  { "imports": { "weblisk": "https://cdn.weblisk.dev/v1/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/v1/" } }
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
   </script>
 </head>
 <body>
@@ -17,18 +17,14 @@
   <a href="#main-content" class="wl-skip-link">Skip to main content</a>
   <nav style="padding:1rem;border-bottom:1px solid #ddd;display:flex;gap:1rem" aria-label="Main navigation">
     <a href="/index.html"><strong>My App</strong></a>
-    <a href="/about.html">About</a>
-    <a href="/blog.html">Blog</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/settings.html">Settings</a>
   </nav>
 
   <main id="main-content">
     <section class="page">
-      <h1>Blog</h1>
-      <article>
-        <h2><a href="/blog/hello-world.html">Hello World</a></h2>
-        <time datetime="2026-01-01">January 1, 2026</time>
-        <p>Your first blog post. Edit or replace this file.</p>
-      </article>
+      <h1>Welcome to My App</h1>
+      <p>Your Weblisk app is running. Edit <code>app/index.html</code> to start building.</p>
     </section>
   </main>
 

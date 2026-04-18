@@ -25,14 +25,14 @@ Each scaffold set is a complete, runnable project directory. The `app/` folder i
 Templates use sensible defaults that work without any processing:
 
 - **Project name** defaults to "My App" — the CLI replaces it on scaffold
-- **Import maps** point to `https://cdn.weblisk.dev/v1/` — works everywhere
+- **Import maps** point to `https://cdn.weblisk.dev/` — works everywhere
 - **Year** is rendered with `<span class="wl-year">` + inline JS — always current
 - **No template syntax** — every file is valid HTML/CSS/JS
 
 When the CLI scaffolds a project, it does two simple string replacements:
 
 1. `My App` / `my-app` → your project name
-2. `https://cdn.weblisk.dev/v1/` → `/lib/weblisk/` (only when `--local` is used)
+2. `https://cdn.weblisk.dev/` → `/lib/weblisk/` (only when `--local` is used)
 
 ## Template Resolution
 
