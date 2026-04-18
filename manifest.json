@@ -2,11 +2,6 @@
   "version": "2.0.0",
   "description": "Official Weblisk project templates — plain HTML/CSS/JS, no build step required",
 
-  "defaults": {
-    "name": "My App",
-    "cdn": "https://cdn.weblisk.dev/"
-  },
-
   "scaffold": {
     "default": {
       "description": "Minimal starter — home page and 404",
@@ -23,20 +18,6 @@
     "docs": {
       "description": "Documentation site with sidebar navigation",
       "path": "scaffold/docs/"
-    }
-  },
-
-  "pages": {
-    "blank": {
-      "description": "Empty page with Weblisk import map",
-      "file": "pages/blank.html"
-    }
-  },
-
-  "islands": {
-    "starter": {
-      "description": "Minimal island component scaffold",
-      "file": "islands/starter.js"
     }
   },
 

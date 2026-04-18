@@ -1,5 +1,4 @@
-# My App — Weblisk environment config
-# These values are used by the CLI during dev and build.
+# Weblisk Configuration
 
 # Origin URL used for sitemap generation and canonical links.
 WL_ORIGIN=http://localhost:3000

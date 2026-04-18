@@ -18,7 +18,9 @@ init/               Project config files (.env, .gitignore)
 manifest.json       Describes available templates and their metadata
 ```
 
-Each scaffold set is a complete, runnable project directory. The `app/` folder inside mirrors the final project layout exactly.
+Each scaffold set is a complete, runnable project directory.
+
+Every template demonstrates core Weblisk features out of the box — islands with lazy hydration, reactive signals, theme switching, view transitions, service worker offline support, and accessibility.
 
 ## How It Works
 
