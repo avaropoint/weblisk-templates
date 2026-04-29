@@ -1,0 +1,25 @@
+type: component
+name: nav
+
+props:
+  brand: { type: string, source: global.name }
+  logo: { type: string, source: global.brand.logo }
+  links:
+    type: array
+    default:
+      - text: Home
+        href: /
+      - text: About
+        href: /about
+
+behavior:
+  mobile: hamburger
+  breakpoint: md
+  sticky: true
+  theme_toggle: true
+
+accessibility:
+  role: navigation
+  aria_label: "Main navigation"
+  keyboard: arrow-keys
+  mobile_focus_trap: true

@@ -24,6 +24,10 @@
       "description": "Documentation site with sidebar navigation and dark mode",
       "path": "client/docs/"
     },
+    "client/blueprint-site": {
+      "description": "Full site described as YAML blueprints — pages, components, islands, theme",
+      "path": "client/blueprint-site/"
+    },
     "server/starter": {
       "description": "Minimal server — orchestrator, gateway, one domain, one agent",
       "path": "server/starter/"
