@@ -1,0 +1,23 @@
+# Greeting Domain Controller
+# Blueprint: https://github.com/avaropoint/weblisk-blueprints/blob/main/architecture/domain.md
+#
+# This file is the domain specification. The CLI + LLM generates the
+# implementation from this spec and the platform blueprint (Go, Node, etc.).
+
+name: greeting
+version: 1.0.0
+
+workflows:
+  greet:
+    trigger: gateway
+    phases:
+      - name: generate-greeting
+        agent: greeter
+        action: greet
+        input: { name: "$.payload.name" }
+
+islands:
+  home:
+    greeting:
+      workflow: greet
+      action: greet

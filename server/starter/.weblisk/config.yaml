@@ -1,0 +1,27 @@
+# Weblisk Hub Configuration — Starter Template
+# See: https://github.com/avaropoint/weblisk-blueprints/blob/main/schemas/config.md
+
+hub:
+  name: starter
+  version: 1.0.0
+
+orchestrator:
+  port: 9800
+  storage: memory
+
+gateway:
+  port: 8080
+  tls: false
+  static_dir: public
+  auth: none
+  rate_limit: 100/min
+
+domains:
+  - name: greeting
+    port: 9700
+
+agents:
+  - name: greeter
+    type: work
+    domain: greeting
+    port: 9710

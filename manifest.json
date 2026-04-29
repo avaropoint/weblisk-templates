@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "description": "Official Weblisk project templates — plain HTML/CSS/JS, no build step required",
+  "version": "3.0.0",
+  "description": "Official Weblisk project templates — client and server",
 
   "defaults": {
     "name": "My App",
@@ -8,21 +8,25 @@
   },
 
   "templates": {
-    "default": {
-      "description": "Minimal starter with a counter island — the base for every new project",
-      "path": "default/"
+    "client/default": {
+      "description": "Minimal client — counter island, service worker, 404 page",
+      "path": "client/default/"
     },
-    "blog": {
-      "description": "Blog with posts, about page, dark mode, and RSS-ready markup",
-      "path": "blog/"
+    "client/blog": {
+      "description": "Blog with posts, about page, theme toggle, dark mode",
+      "path": "client/blog/"
     },
-    "dashboard": {
-      "description": "Admin dashboard with stat cards, settings form, and live counter",
-      "path": "dashboard/"
+    "client/dashboard": {
+      "description": "Admin dashboard with stat cards, settings, live counter",
+      "path": "client/dashboard/"
     },
-    "docs": {
+    "client/docs": {
       "description": "Documentation site with sidebar navigation and dark mode",
-      "path": "docs/"
+      "path": "client/docs/"
+    },
+    "server/starter": {
+      "description": "Minimal server — orchestrator, gateway, one domain, one agent",
+      "path": "server/starter/"
     }
   }
 }
