@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "description": "Official Weblisk project templates — client and server",
+  "description": "Official Weblisk project templates — blueprint-driven, no generated code checked in",
 
   "defaults": {
     "name": "My App",
@@ -8,28 +8,13 @@
   },
 
   "templates": {
-    "client/default": {
-      "description": "Minimal client — counter island, service worker, 404 page",
-      "path": "client/default/"
-    },
-    "client/blog": {
-      "description": "Blog with posts, about page, theme toggle, dark mode",
-      "path": "client/blog/"
-    },
-    "client/dashboard": {
-      "description": "Admin dashboard with stat cards, settings, live counter",
-      "path": "client/dashboard/"
-    },
-    "client/docs": {
-      "description": "Documentation site with sidebar navigation and dark mode",
-      "path": "client/docs/"
-    },
-    "client/blueprint-site": {
-      "description": "Full site described as YAML blueprints — pages, components, islands, theme",
-      "path": "client/blueprint-site/"
+    "client/starter": {
+      "description": "Client website built entirely from blueprints — the default for weblisk new",
+      "path": "client/starter/",
+      "default": true
     },
     "server/starter": {
-      "description": "Minimal server — orchestrator, gateway, one domain, one agent",
+      "description": "Minimal Weblisk server — one domain, one agent, one page",
       "path": "server/starter/"
     }
   }
