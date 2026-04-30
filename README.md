@@ -23,8 +23,21 @@ Templates demonstrate how to build with the Weblisk blueprint model:
 
 | Template | Command | Description |
 |----------|---------|-------------|
-| **client/starter** | `weblisk new my-site` | Client website built entirely from blueprints |
-| **server/starter** | `weblisk new --template server/starter` | Minimal server hub with one domain and one agent |
+| **client/starter** | `weblisk new my-site` | Static website — blueprints only, no server |
+| **server/starter** | `weblisk new --template server/starter` | Full-stack — same site + hub with agents |
+
+Both templates build the **same website** (landing page, about page,
+contact form). The difference is how the interactive parts work:
+
+| | `client/starter` | `server/starter` |
+|---|---|---|
+| Pages & components | Blueprints → generated HTML/CSS | Same |
+| Contact form island | `protocol: none` (mailto fallback) | `protocol: agent` (server-backed) |
+| Server infrastructure | None | Hub + domain + contact agent |
+| Deployment | Any static host | Weblisk hub |
+
+**Choose `client/starter`** if you want a static site with no server.
+**Choose `server/starter`** if you want server-side processing (validation, storage, notifications).
 
 ## Structure
 
@@ -42,7 +55,7 @@ client/
         nav.yaml             ← site navigation
         footer.yaml          ← site footer
       islands/
-        contact-form.yaml    ← interactive contact form (client-only)
+        contact-form.yaml    ← contact form (protocol: none — client-only)
       content/
         features.yaml        ← structured feature list
         team.yaml            ← team member data
@@ -50,13 +63,17 @@ client/
       logo.svg               ← brand logo
 
 server/
-  starter/                   ← minimal server hub
-    .weblisk/config.yaml     ← hub topology (ports, components)
-    public/                  ← static files served by gateway
-    domains/greeting/
-      domain.yaml            ← domain spec (workflows, island routing)
-    agents/greeter/
-      agent.yaml             ← agent spec (capabilities, actions)
+  starter/                   ← full-stack template
+    blueprints/              ← same blueprints as client/starter...
+      islands/
+        contact-form.yaml    ← ...except this: protocol: agent (server-backed)
+    assets/
+      logo.svg               ← brand logo
+    .weblisk/config.yaml     ← hub topology (orchestrator, gateway, domains, agents)
+    domains/website/
+      domain.yaml            ← website domain (contact workflow)
+    agents/contact/
+      agent.yaml             ← contact agent (validate, store, notify)
 
 manifest.json                ← describes available templates
 ```
@@ -76,22 +93,16 @@ creates a project:
 
 ### Server templates
 
-Server templates are declarative YAML specifications:
+Server templates contain the same blueprints plus server infrastructure
+specs. They're self-contained — the server/starter IS the client/starter
+with agents layered on top:
 
-1. `.weblisk/config.yaml` defines the hub topology
-2. `domains/*/domain.yaml` defines domain controllers
-3. `agents/*/agent.yaml` defines agent capabilities
-4. `weblisk server init --platform go` generates the implementation
-5. `weblisk server start` runs the hub
-
-### Combined
-
-Layer client + server together:
-
-```bash
-weblisk new my-app
-weblisk new --template server/starter --merge
-```
+1. `weblisk build` generates the client site from blueprints (same as above)
+2. `.weblisk/config.yaml` defines the hub topology
+3. `domains/*/domain.yaml` defines workflows and island routing
+4. `agents/*/agent.yaml` defines agent capabilities and actions
+5. `weblisk server init --platform go` generates the server implementation
+6. `weblisk server start` runs the hub (gateway serves `public/` + routes islands to agents)
 
 ## Template Resolution
 

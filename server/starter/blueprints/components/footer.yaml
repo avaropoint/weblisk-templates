@@ -1,0 +1,26 @@
+type: component
+name: footer
+
+props:
+  brand: { type: string, source: global.name }
+  copyright: { type: string, source: global.identity.copyright_year }
+  links:
+    type: array
+    default:
+      - text: Home
+        href: /
+      - text: About
+        href: /about
+
+sections:
+  - type: brand
+    logo: true
+    tagline: true
+  - type: links
+    columns: 1
+  - type: copyright
+    text: "© {copyright} {brand}. All rights reserved."
+
+accessibility:
+  role: contentinfo
+  aria_label: "Site footer"

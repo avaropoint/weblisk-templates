@@ -1,0 +1,27 @@
+# Website Domain Controller
+# Blueprint: https://github.com/avaropoint/weblisk-blueprints/blob/main/architecture/domain.md
+#
+# This domain owns the website's interactive workflows. The CLI + LLM
+# generates the implementation from this spec and the platform blueprint.
+
+name: website
+version: 1.0.0
+
+workflows:
+  contact:
+    trigger: gateway
+    description: "Process a contact form submission"
+    phases:
+      - name: validate-and-store
+        agent: contact
+        action: submit
+        input:
+          name: "$.payload.name"
+          email: "$.payload.email"
+          message: "$.payload.message"
+
+islands:
+  home:
+    contact-form:
+      workflow: contact
+      action: submit

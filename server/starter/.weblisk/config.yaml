@@ -2,7 +2,7 @@
 # See: https://github.com/avaropoint/weblisk-blueprints/blob/main/schemas/config.md
 
 hub:
-  name: starter
+  name: "{{name}}"
   version: 1.0.0
 
 orchestrator:
@@ -17,11 +17,11 @@ gateway:
   rate_limit: 100/min
 
 domains:
-  - name: greeting
+  - name: website
     port: 9700
 
 agents:
-  - name: greeter
+  - name: contact
     type: work
-    domain: greeting
+    domain: website
     port: 9710
