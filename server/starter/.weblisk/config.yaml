@@ -20,9 +20,9 @@ gateway:
   auth: none
   rate_limit: 100/min
   cors:
-    origins: ["http://localhost:*"]
-    methods: [GET, POST]
-    headers: [Content-Type, X-Request-Id]
+    origins: [ "http://localhost:*" ]
+    methods: [ GET, POST ]
+    headers: [ Content-Type, X-Request-Id ]
   islands:
     # Maps island requests to domain workflows.
     # When the client POSTs to /islands/home/contact-form,
@@ -36,7 +36,5 @@ domains:
 agents:
   - name: contact
     type: work
-    domain: website
-    port: 9710
     domain: website
     port: 9710
