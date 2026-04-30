@@ -3,6 +3,14 @@
 #
 # This domain owns the website's interactive workflows. The CLI + LLM
 # generates the implementation from this spec and the platform blueprint.
+#
+# Request flow:
+#   Client → POST /islands/home/contact-form
+#   Gateway → routes to this domain (port 9700)
+#   Domain  → triggers 'contact' workflow
+#   Workflow → dispatches to contact agent (port 9710)
+#   Agent   → validates, stores, returns response
+#   Domain  → returns result to gateway → client island
 
 name: website
 version: 1.0.0
@@ -19,9 +27,13 @@ workflows:
           name: "$.payload.name"
           email: "$.payload.email"
           message: "$.payload.message"
+        timeout: 5000
+        on_error: fail
 
 islands:
   home:
     contact-form:
       workflow: contact
       action: submit
+      method: POST
+      content_type: application/json

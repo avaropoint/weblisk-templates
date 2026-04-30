@@ -1,20 +1,31 @@
 # Starter (Full Stack)
 
-A complete Weblisk project — the same website as `client/starter`, but
-backed by a server hub with agents that handle the interactive parts.
+Extends `client/starter` with a server hub — same website, but the
+interactive parts (islands) are backed by server agents.
+
+## How Extends Works
+
+This template uses `extends: client/starter` in `project.yaml`. All
+blueprints (global, code, theme, pages, components, content, assets)
+are inherited from the client template. Only **overrides** and
+**additions** live here:
+
+| File | Purpose |
+|---|---|
+| `project.yaml` | Declares `extends: client/starter` + server mode |
+| `blueprints/islands/contact-form.yaml` | Overrides protocol: none → agent |
+| `.weblisk/config.yaml` | Hub topology (gateway, domain, agent) |
+| `domains/website/domain.yaml` | Workflow routing for islands |
+| `agents/contact/agent.yaml` | Contact form processing agent |
 
 ## What's Different from `client/starter`?
 
 | | `client/starter` | `server/starter` |
 |---|---|---|
-| **Blueprints** | Same pages, components, content | Same pages, components, content |
 | **Islands** | `protocol: none` (client-only) | `protocol: agent` (server-backed) |
 | **Server** | None — static site only | Hub with domain + contact agent |
-| **Contact form** | `mailto:` fallback | Agent validates, stores, notifies |
+| **Contact form** | `mailto:` fallback | Agent validates + stores |
 | **Deploy** | Any static host | Weblisk hub (Go, Cloudflare, Node, Rust) |
-
-If you just want a static site, use `client/starter`. If you want
-server-side processing, use this template.
 
 ## Quick Start
 
@@ -30,24 +41,20 @@ weblisk server start                   # start the hub
 ## Project Structure
 
 ```
-blueprints/                  ← same as client/starter (YAML → generated HTML/CSS/JS)
-  global.yaml                ← project identity, brand, policies
-  code.yaml                  ← code generation conventions
-  theme.yaml                 ← design tokens
-  pages/
-    home.yaml                ← landing page (hero + features + contact form)
-    about.yaml               ← about page (team section)
-  components/
-    nav.yaml                 ← responsive navigation
-    footer.yaml              ← site footer
+project.yaml                 ← extends: client/starter (inherits all blueprints)
+blueprints/
   islands/
-    contact-form.yaml        ← contact form (protocol: agent — server-backed)
-  content/
-    features.yaml            ← feature list data
-    team.yaml                ← team member data
-assets/
-  logo.svg                   ← brand logo
+    contact-form.yaml        ← OVERRIDE: protocol: agent (server-backed)
+.weblisk/
+  config.yaml               ← hub topology (orchestrator, gateway, domains, agents)
+domains/website/
+  domain.yaml                ← website domain (contact workflow, island routing)
+agents/contact/
+  agent.yaml                 ← contact agent (validate, store)
+```
 
+Everything else (pages, components, content, theme, assets) is inherited
+from `client/starter` via the extends mechanism.
 .weblisk/config.yaml         ← hub topology (orchestrator, gateway, domains, agents)
 domains/website/
   domain.yaml                ← website domain (contact workflow, island routing)
@@ -57,13 +64,14 @@ agents/contact/
 
 ## How It Works
 
-1. **Blueprints** describe the website (pages, components, islands, content)
-2. **`weblisk build`** generates the site into `public/` from blueprints
-3. **Domain spec** declares the workflows that handle island interactions
-4. **Agent spec** declares what the contact agent does (validate, store, notify)
-5. **`weblisk server init`** reads specs + platform blueprint → generates server code
-6. **Gateway** serves `public/` and routes island requests to the website domain
-7. **Website domain** dispatches to the contact agent when the form is submitted
+1. **`extends: client/starter`** pulls in all blueprints (pages, components, content, theme)
+2. **Island override** changes contact-form from `protocol: none` → `protocol: agent`
+3. **`weblisk build`** generates the site into `public/` (same as client, but island posts to server)
+4. **Domain spec** declares the workflows that handle island interactions
+5. **Agent spec** declares what the contact agent does (validate, store)
+6. **`weblisk server init`** reads specs + platform blueprint → generates server code
+7. **Gateway** serves `public/` and routes island requests to the website domain
+8. **Website domain** dispatches to the contact agent when the form is submitted
 
 ## The Contact Flow
 

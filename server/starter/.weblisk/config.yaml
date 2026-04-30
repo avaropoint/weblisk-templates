@@ -1,5 +1,8 @@
 # Weblisk Hub Configuration — Starter Template
 # See: https://github.com/avaropoint/weblisk-blueprints/blob/main/schemas/config.md
+#
+# This is the minimum viable hub for serving a blueprint-generated site
+# with one server-backed island (contact form).
 
 hub:
   name: "{{name}}"
@@ -8,6 +11,7 @@ hub:
 orchestrator:
   port: 9800
   storage: memory
+  audit: true
 
 gateway:
   port: 8080
@@ -15,6 +19,15 @@ gateway:
   static_dir: public
   auth: none
   rate_limit: 100/min
+  cors:
+    origins: ["http://localhost:*"]
+    methods: [GET, POST]
+    headers: [Content-Type, X-Request-Id]
+  islands:
+    # Maps island requests to domain workflows.
+    # When the client POSTs to /islands/home/contact-form,
+    # the gateway routes it to the website domain's contact workflow.
+    routing: domain
 
 domains:
   - name: website
@@ -23,5 +36,7 @@ domains:
 agents:
   - name: contact
     type: work
+    domain: website
+    port: 9710
     domain: website
     port: 9710

@@ -1,0 +1,16 @@
+# Server Starter — extends client/starter with server capabilities.
+#
+# All blueprints (global, code, theme, pages, components, content, assets)
+# are inherited from client/starter. Only overrides and additions live here.
+#
+# What this adds:
+#   - islands/contact-form.yaml  → overrides protocol: none → protocol: agent
+#   - .weblisk/config.yaml       → hub topology
+#   - domains/website/            → domain controller with workflows
+#   - agents/contact/             → work agent for contact form processing
+
+extends: client/starter
+
+server:
+  platform: any
+  hub: true

@@ -24,20 +24,20 @@ Templates demonstrate how to build with the Weblisk blueprint model:
 | Template | Command | Description |
 |----------|---------|-------------|
 | **client/starter** | `weblisk new my-site` | Static website — blueprints only, no server |
-| **server/starter** | `weblisk new --template server/starter` | Full-stack — same site + hub with agents |
+| **server/starter** | `weblisk new --template server/starter` | Extends client/starter with a server hub |
 
 Both templates build the **same website** (landing page, about page,
 contact form). The difference is how the interactive parts work:
 
 | | `client/starter` | `server/starter` |
 |---|---|---|
-| Pages & components | Blueprints → generated HTML/CSS | Same |
+| Pages & components | Blueprints → generated HTML/CSS | Inherited via `extends` |
 | Contact form island | `protocol: none` (mailto fallback) | `protocol: agent` (server-backed) |
 | Server infrastructure | None | Hub + domain + contact agent |
 | Deployment | Any static host | Weblisk hub |
 
 **Choose `client/starter`** if you want a static site with no server.
-**Choose `server/starter`** if you want server-side processing (validation, storage, notifications).
+**Choose `server/starter`** if you want server-side processing (validation, storage).
 
 ## Structure
 
@@ -63,19 +63,18 @@ client/
       logo.svg               ← brand logo
 
 server/
-  starter/                   ← full-stack template
-    blueprints/              ← same blueprints as client/starter...
+  starter/                   ← extends client/starter (no duplication)
+    project.yaml             ← declares extends: client/starter
+    blueprints/
       islands/
-        contact-form.yaml    ← ...except this: protocol: agent (server-backed)
-    assets/
-      logo.svg               ← brand logo
+        contact-form.yaml    ← OVERRIDE: protocol: agent (server-backed)
     .weblisk/config.yaml     ← hub topology (orchestrator, gateway, domains, agents)
     domains/website/
-      domain.yaml            ← website domain (contact workflow)
+      domain.yaml            ← website domain (contact workflow, island routing)
     agents/contact/
-      agent.yaml             ← contact agent (validate, store, notify)
+      agent.yaml             ← contact agent (validate, store)
 
-manifest.json                ← describes available templates
+manifest.json                ← describes available templates + extends relationships
 ```
 
 ## How It Works
@@ -93,16 +92,19 @@ creates a project:
 
 ### Server templates
 
-Server templates contain the same blueprints plus server infrastructure
-specs. They're self-contained — the server/starter IS the client/starter
-with agents layered on top:
+Server templates **extend** client templates — they don't duplicate them.
+The `extends` mechanism resolves the base template's blueprints and allows
+selective overrides:
 
-1. `weblisk build` generates the client site from blueprints (same as above)
-2. `.weblisk/config.yaml` defines the hub topology
-3. `domains/*/domain.yaml` defines workflows and island routing
-4. `agents/*/agent.yaml` defines agent capabilities and actions
-5. `weblisk server init --platform go` generates the server implementation
-6. `weblisk server start` runs the hub (gateway serves `public/` + routes islands to agents)
+1. `project.yaml` declares `extends: client/starter`
+2. All blueprints are resolved from the base (pages, components, content, theme, assets)
+3. Only overridden files live in the server template (e.g., island with `protocol: agent`)
+4. `weblisk build` generates the client site from the merged blueprint tree
+5. `.weblisk/config.yaml` defines the hub topology
+6. `domains/*/domain.yaml` defines workflows and island routing
+7. `agents/*/agent.yaml` defines agent capabilities and actions
+8. `weblisk server init --platform go` generates the server implementation
+9. `weblisk server start` runs the hub (gateway serves `public/` + routes islands to agents)
 
 ## Template Resolution
 

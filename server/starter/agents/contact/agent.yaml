@@ -4,29 +4,64 @@
 # Handles contact form submissions — validates input, stores the message,
 # and optionally sends a notification. The CLI + LLM generates the
 # implementation from this spec and the platform blueprint.
+#
+# This is a work agent: it executes tasks dispatched by the website domain.
+# It does NOT initiate work on its own.
 
 name: contact
 version: 1.0.0
 type: work
 domain: website
 
+extends:
+  - patterns/api-rest
+  - patterns/storage
+
 capabilities:
   - data:validate
   - data:store
-  - notification:send
 
 actions:
   submit:
     description: "Validate and store a contact form submission"
     input:
-      name: { type: string, required: true, max_length: 100 }
-      email: { type: string, format: email, required: true }
-      message: { type: string, required: true, max_length: 5000 }
+      name:
+        type: string
+        required: true
+        min_length: 1
+        max_length: 100
+      email:
+        type: string
+        format: email
+        required: true
+        max_length: 254
+      message:
+        type: string
+        required: true
+        min_length: 10
+        max_length: 5000
     output:
       id: { type: string, description: "Stored submission ID" }
-      status: { type: string, enum: [received, error] }
-    on_success:
-      - notification:send
-        channel: email
-        to: "{{admin_email}}"
-        subject: "New contact: {name}"
+      status: { type: string, enum: [received, invalid] }
+    errors:
+      - code: VALIDATION_FAILED
+        description: "Input failed validation (missing fields, invalid email, etc.)"
+      - code: STORAGE_ERROR
+        description: "Failed to persist the submission"
+
+storage:
+  entity: contact_submission
+  fields:
+    - name: id
+      type: string
+      generated: true
+    - name: name
+      type: string
+    - name: email
+      type: string
+    - name: message
+      type: text
+    - name: submitted_at
+      type: timestamp
+      generated: true
+  retention: 90d

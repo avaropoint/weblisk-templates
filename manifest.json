@@ -14,8 +14,9 @@
       "default": true
     },
     "server/starter": {
-      "description": "Minimal Weblisk server — one domain, one agent, one page",
-      "path": "server/starter/"
+      "description": "Extends client/starter with a server hub — adds domain, agent, and server-backed islands",
+      "path": "server/starter/",
+      "extends": "client/starter"
     }
   }
 }
