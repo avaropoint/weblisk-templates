@@ -1,4 +1,19 @@
+# Weblisk framework (NEVER commit these)
+.weblisk/secrets/
+.weblisk/keys/
+.weblisk/token
+
+# Generated output
 public/
-node_modules/
+
+# Environment
 .env
-.env.local
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
