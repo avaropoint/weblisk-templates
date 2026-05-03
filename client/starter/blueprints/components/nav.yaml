@@ -11,15 +11,46 @@ props:
         href: /
       - text: About
         href: /about
+      - text: Contact
+        href: /#contact
+
+slots:
+  actions:
+    default: false
+    description: "Optional slot for CTA buttons or auth controls"
 
 behavior:
   mobile: hamburger
   breakpoint: md
   sticky: true
   theme_toggle: true
+  active_link: current-route
+  scroll_shadow: true
 
 accessibility:
   role: navigation
   aria_label: "Main navigation"
+  skip_to_content:
+    text: "Skip to main content"
+    target: "#main"
   keyboard: arrow-keys
   mobile_focus_trap: true
+  current_page: aria-current="page"
+  mobile_toggle:
+    aria_label: "Toggle menu"
+    aria_expanded: false
+    aria_controls: "nav-menu"
+
+variants:
+  default:
+    background: surface
+    text: text
+    border_bottom: border
+    height: 64px
+    padding_x: container
+  transparent:
+    background: transparent
+    text: surface
+    border_bottom: none
+    height: 72px
+    padding_x: container

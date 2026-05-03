@@ -4,6 +4,9 @@ The default client template — a complete website described entirely as
 blueprints. No hand-written HTML, CSS, or JavaScript. Everything is
 generated from YAML declarations.
 
+**Targets:** Lighthouse 100 across all audits, WCAG 2.2 AA, SEO/AEO/AIO
+optimized, deterministic output from the same blueprints every time.
+
 ## Quick Start
 
 ```bash
@@ -11,31 +14,32 @@ weblisk new my-site
 cd my-site
 weblisk build
 weblisk dev
+# → http://localhost:3000 — Lighthouse 100, WCAG AA, full structured data
 ```
 
 ## What's Included
 
-This starter gives you everything needed for a simple, production-ready
-website:
-
 ```
 blueprints/
-  global.yaml           # Project identity, brand, policies
-  code.yaml             # Code generation conventions
-  theme.yaml            # Design tokens (colors, spacing, typography)
+  global.yaml           # Identity, brand, policies, weblisk dependency
+  code.yaml             # Generation rules, import map, head order, SEO, perf
+  theme.yaml            # Design tokens, scales, focus styles, dark mode
   pages/
-    home.yaml           # Landing page with hero + features
-    about.yaml          # About page with team section
+    home.yaml           # Landing: hero, features, contact — full structured data
+    about.yaml          # About: content, team grid — breadcrumbs, Organization schema
   components/
-    nav.yaml            # Site navigation (responsive, sticky)
-    footer.yaml         # Site footer with brand + links
+    nav.yaml            # Navigation: skip-to-content, focus trap, variants
+    footer.yaml         # Footer: brand, links, contact, copyright
   islands/
-    contact-form.yaml   # Contact form (client-only, no agent)
+    contact-form.yaml   # Contact form: validation, accessibility, data schema
   content/
-    features.yaml       # Structured feature list
-    team.yaml           # Team member data
+    features.yaml       # Feature list with icon alt text
+    team.yaml           # Team data with avatar/social placeholders
+  assets/
+    logo.yaml           # Logo variants, favicon gen, PWA manifest
+    media.yaml          # Font loading, responsive image rules
 assets/
-  logo.svg              # Brand logo
+  logo.svg              # Brand logo (32x32 SVG)
 ```
 
 ## How It Works

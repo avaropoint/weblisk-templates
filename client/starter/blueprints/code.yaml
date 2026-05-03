@@ -1,22 +1,66 @@
 framework: weblisk
-version: "1.0"
+version: "2.0"
+
+runtime:
+  import_map:
+    weblisk: "https://cdn.weblisk.dev/v1/weblisk.js"
+    weblisk/: "https://cdn.weblisk.dev/v1/"
+  modules:
+    core: [signal, effect, computed, store, enhance]
+    hydrate: [hydrateIslands]
+    net: [fetch]
+    a11y: [focus, motion, locale]
+    pwa: [manifest, offline]
+  loading: importmap
+  no_bundler: true
 
 html:
   doctype: html5
   charset: utf-8
   viewport: "width=device-width, initial-scale=1"
+  lang: from-global-locale
   indent: 2
   semantic: strict
-  attributes_order: [id, class, data-*, aria-*, role]
+  attributes_order: [id, class, data-*, aria-*, role, href, src, alt, type, name, value]
+  self_closing: false
+  trailing_slash: false
+  skip_to_content: true
+
+head:
+  order:
+    - charset
+    - viewport
+    - title
+    - description
+    - canonical
+    - robots
+    - open-graph
+    - twitter-card
+    - structured-data
+    - preconnect
+    - dns-prefetch
+    - stylesheet
+    - import-map
+    - module-script
+    - favicon
+  preconnect:
+    - "https://cdn.weblisk.dev"
+    - "https://fonts.googleapis.com"
+    - "https://fonts.gstatic.com"
 
 css:
   methodology: utility-first
   custom_properties: true
   nesting: native
   media_queries: mobile-first
-  units: { spacing: rem, font: rem, layout: fr }
+  units: { spacing: rem, font: rem, layout: fr, border: px }
   dark_mode: prefers-color-scheme
   animations: reduced-motion-safe
+  critical: inline
+  font_display: swap
+  color_scheme: "light dark"
+  container_queries: true
+  logical_properties: true
 
 javascript:
   target: es2022
@@ -27,6 +71,7 @@ javascript:
   error_handling: boundary
   state: signals
   no_globals: true
+  strict: true
 
 islands:
   hydration: lazy
@@ -34,6 +79,8 @@ islands:
   fallback: skeleton
   error: graceful
   communication: events
+  threshold: 200px
+  root_margin: "0px 0px 200px 0px"
 
 generation:
   deterministic: true
@@ -42,3 +89,31 @@ generation:
   component_naming: PascalCase
   max_file_lines: 300
   imports: explicit
+  output_order:
+    - html-structure
+    - css-custom-properties
+    - css-base
+    - css-layout
+    - css-components
+    - css-utilities
+    - css-dark-mode
+    - css-print
+    - js-imports
+    - js-state
+    - js-effects
+    - js-handlers
+    - js-init
+
+seo:
+  sitemap: true
+  robots: true
+  canonical: auto
+  trailing_slash: false
+  heading_hierarchy: strict
+
+performance:
+  lazy_images: true
+  async_scripts: true
+  defer_non_critical: true
+  prefetch_links: hover
+  resource_hints: true

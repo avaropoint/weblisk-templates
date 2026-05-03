@@ -1,12 +1,15 @@
 items:
   - title: "Describe"
-    description: "Write YAML blueprints that declare what your site should be."
+    description: "Write YAML blueprints that declare what your site should be — pages, components, interactions, and content. No code, just intent."
     icon: pencil
+    icon_alt: "Pencil icon representing the describe step"
 
   - title: "Generate"
-    description: "The LLM compiles your blueprints into production-ready code."
+    description: "The LLM compiles your blueprints into production-ready HTML, CSS, and JavaScript. Same input, same output, every time."
     icon: cpu
+    icon_alt: "CPU icon representing the generate step"
 
   - title: "Ship"
-    description: "Serve directly — no build step, no bundler, no framework lock-in."
+    description: "Serve directly with ES modules and import maps — no build step, no bundler, no framework lock-in. Lighthouse 100 out of the box."
     icon: rocket
+    icon_alt: "Rocket icon representing the ship step"

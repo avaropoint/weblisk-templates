@@ -36,6 +36,14 @@ contact form). The difference is how the interactive parts work:
 | Server infrastructure | None | Hub + domain + contact agent |
 | Deployment | Any static host | Weblisk hub |
 
+**Both templates target:**
+- Lighthouse 100 across Performance, Accessibility, Best Practices, SEO
+- WCAG 2.2 AA compliance
+- Full structured data (WebSite, Organization, FAQ, BreadcrumbList, speakable)
+- SEO/AEO/AIO optimization (answer engines, AI discovery)
+- Deterministic generation (same blueprints → same output every time)
+- Weblisk v2 client library via import maps (zero build step)
+
 **Choose `client/starter`** if you want a static site with no server.
 **Choose `server/starter`** if you want server-side processing (validation, storage).
 
@@ -47,20 +55,23 @@ client/
     blueprints/
       global.yaml            ← project identity, brand, policies
       code.yaml              ← code generation conventions
-      theme.yaml             ← design tokens (colors, spacing, type)
+      theme.yaml             ← design tokens, scales, focus styles, dark mode
       pages/
-        home.yaml            ← landing page with hero + features
-        about.yaml           ← about page with team section
+        home.yaml            ← landing: hero, features, contact — structured data
+        about.yaml           ← about: content, team — breadcrumbs
       components/
-        nav.yaml             ← site navigation
-        footer.yaml          ← site footer
+        nav.yaml             ← navigation: skip-to-content, focus trap, variants
+        footer.yaml          ← footer: brand, links, contact, copyright
       islands/
-        contact-form.yaml    ← contact form (protocol: none — client-only)
+        contact-form.yaml    ← contact form: validation, accessibility, data schema
       content/
-        features.yaml        ← structured feature list
-        team.yaml            ← team member data
+        features.yaml        ← feature list with icon alt text
+        team.yaml            ← team data with avatar/social placeholders
+      assets/
+        logo.yaml            ← logo variants, favicon generation, PWA manifest
+        media.yaml           ← font loading strategy, responsive image rules
     assets/
-      logo.svg               ← brand logo
+      logo.svg               ← brand logo (32x32 SVG)
 
 server/
   starter/                   ← extends client/starter (no duplication)

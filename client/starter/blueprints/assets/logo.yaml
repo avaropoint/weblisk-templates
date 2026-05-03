@@ -1,0 +1,45 @@
+source: assets/logo.svg
+
+variants:
+  - name: default
+    width: 32
+    height: 32
+    context: nav
+  - name: large
+    width: 128
+    height: 128
+    context: footer
+  - name: og
+    width: 1200
+    height: 630
+    context: social
+
+favicon:
+  source: assets/logo.svg
+  generate:
+    - size: 32x32
+      format: png
+      purpose: favicon
+    - size: 180x180
+      format: png
+      purpose: apple-touch-icon
+    - size: 192x192
+      format: png
+      purpose: pwa-icon
+    - size: 512x512
+      format: png
+      purpose: pwa-icon
+    - size: any
+      format: svg
+      purpose: favicon
+
+manifest:
+  name: "{{name}}"
+  short_name: "{{name}}"
+  description: from-global-identity-description
+  theme_color: from-brand-primary
+  background_color: from-brand-surface
+  display: standalone
+  start_url: /
+  scope: /
+  icons: from-favicon-generate

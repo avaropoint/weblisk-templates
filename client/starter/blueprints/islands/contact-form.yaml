@@ -1,21 +1,39 @@
 type: island
 name: contact-form
 protocol: none
+auth: none
+
+data:
+  format: json
+  schema:
+    type: object
+    properties:
+      name: { type: string, minLength: 1, maxLength: 100 }
+      email: { type: string, format: email, maxLength: 254 }
+      message: { type: string, minLength: 10, maxLength: 5000 }
+    required: [name, email, message]
 
 fields:
   - name: name
     type: text
     required: true
     label: "Your name"
+    autocomplete: name
+    minlength: 1
+    maxlength: 100
   - name: email
     type: email
     required: true
     label: "Email address"
+    autocomplete: email
+    maxlength: 254
   - name: message
     type: textarea
     required: true
     label: "Message"
     rows: 4
+    minlength: 10
+    maxlength: 5000
 
 behavior:
   validate: on-blur
@@ -24,8 +42,19 @@ behavior:
   error: "Something went wrong. Please try again."
   reset_on_success: true
 
+ui:
+  loading: skeleton
+  transition: fade
+  error: inline
+  submit_button:
+    text: "Send Message"
+    loading_text: "Sending..."
+
 accessibility:
   role: form
   aria_label: "Contact form"
+  aria_live: polite
   error_announcement: assertive
   required_indicator: "(required)"
+  focus_management: none
+  field_descriptions: true

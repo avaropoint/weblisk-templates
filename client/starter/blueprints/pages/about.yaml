@@ -3,6 +3,10 @@ route: /about
 title: "About"
 layout: default
 
+components:
+  header: components/nav
+  footer: components/footer
+
 sections:
   - type: content
     heading: "About Us"
@@ -12,16 +16,51 @@ sections:
       CSS, or JavaScript. Every page, component, and interaction is
       declared, then generated.
 
+      The result is a website that hits 100 on every Lighthouse audit,
+      meets WCAG 2.2 AA accessibility standards, and is optimized for
+      search engines, answer engines, and AI discovery — all from a
+      handful of YAML files.
+
   - type: grid
     heading: "Our Team"
     source: content/team.yaml
     columns: 2
     card_variant: compact
+    card_fields:
+      image: avatar
+      title: name
+      subtitle: role
+      body: bio
 
 seo:
   title: "About — {{name}}"
-  description: "Learn about our blueprint-driven approach to building for the web."
+  description: "Learn how {{name}} uses blueprint-driven development to build production-ready websites from YAML declarations."
+  canonical: "https://{{domain}}/about"
+  sitemap_priority: 0.8
+  sitemap_changefreq: monthly
+
+social_meta:
+  og_type: website
+  og_title: "About — {{name}}"
+  og_description: "Learn how {{name}} uses blueprint-driven development to build production-ready websites."
+  og_url: "https://{{domain}}/about"
+  og_image: null
+  twitter_card: summary
 
 structured_data:
-  type: AboutPage
-  name: "About {{name}}"
+  - type: AboutPage
+    name: "About {{name}}"
+    url: "https://{{domain}}/about"
+    description: "Learn about our blueprint-driven approach to building for the web."
+    mainEntity:
+      type: Organization
+      name: "{{name}}"
+      url: "https://{{domain}}"
+  - type: BreadcrumbList
+    itemListElement:
+      - position: 1
+        name: "Home"
+        item: "https://{{domain}}/"
+      - position: 2
+        name: "About"
+        item: "https://{{domain}}/about"

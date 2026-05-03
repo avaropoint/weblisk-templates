@@ -3,7 +3,9 @@ name: footer
 
 props:
   brand: { type: string, source: global.name }
+  tagline: { type: string, source: global.identity.tagline }
   copyright: { type: string, source: global.identity.copyright_year }
+  contact: { type: string, source: global.identity.contact }
   links:
     type: array
     default:
@@ -11,16 +13,30 @@ props:
         href: /
       - text: About
         href: /about
+      - text: Contact
+        href: /#contact
 
 sections:
   - type: brand
     logo: true
     tagline: true
   - type: links
+    heading: "Pages"
     columns: 1
+  - type: contact
+    heading: "Contact"
+    email: true
   - type: copyright
     text: "© {copyright} {brand}. All rights reserved."
 
 accessibility:
   role: contentinfo
   aria_label: "Site footer"
+  link_purpose: self-evident
+
+variants:
+  default:
+    background: primary
+    text: surface
+    padding_y: 48px
+    border_top: border

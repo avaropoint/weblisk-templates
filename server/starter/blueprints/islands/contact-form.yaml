@@ -10,6 +10,7 @@ extends: client/starter/blueprints/islands/contact-form
 protocol: agent
 agent: contact
 action: submit
+auth: none
 
 behavior:
   validate: on-blur
@@ -17,6 +18,8 @@ behavior:
   success: "Thanks! We'll be in touch."
   error: "Something went wrong. Please try again."
   reset_on_success: true
+  debounce: 300ms
+  optimistic: false
   aria_label: "Contact form"
   error_announcement: assertive
   required_indicator: "(required)"
