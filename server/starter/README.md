@@ -3,6 +3,9 @@
 Extends `client/starter` with a server hub — same website, but the
 interactive parts (islands) are backed by server agents.
 
+**Targets:** Same Lighthouse 100, WCAG AA, SEO/AEO/AIO compliance as
+`client/starter` — plus server-side form processing with validation and storage.
+
 ## How Extends Works
 
 This template uses `extends: client/starter` in `project.yaml`. All
@@ -14,7 +17,7 @@ are inherited from the client template. Only **overrides** and
 |---|---|
 | `project.yaml` | Declares `extends: client/starter` + server mode |
 | `blueprints/islands/contact-form.yaml` | Overrides protocol: none → agent |
-| `.weblisk/config.yaml` | Hub topology (gateway, domain, agent) |
+| `.weblisk/config.yaml` | Hub topology (gateway, domain, agent, health check) |
 | `domains/website/domain.yaml` | Workflow routing for islands |
 | `agents/contact/agent.yaml` | Contact form processing agent |
 
@@ -36,6 +39,7 @@ weblisk build                          # generate client from blueprints
 weblisk server init --platform go      # generate server from specs
 weblisk server start                   # start the hub
 # → http://localhost:8080
+# → http://localhost:8080/healthz (health check)
 ```
 
 ## Project Structure
@@ -46,7 +50,7 @@ blueprints/
   islands/
     contact-form.yaml        ← OVERRIDE: protocol: agent (server-backed)
 .weblisk/
-  config.yaml               ← hub topology (orchestrator, gateway, domains, agents)
+  config.yaml                ← hub topology (orchestrator, gateway, domains, agents)
 domains/website/
   domain.yaml                ← website domain (contact workflow, island routing)
 agents/contact/
@@ -55,12 +59,6 @@ agents/contact/
 
 Everything else (pages, components, content, theme, assets) is inherited
 from `client/starter` via the extends mechanism.
-.weblisk/config.yaml         ← hub topology (orchestrator, gateway, domains, agents)
-domains/website/
-  domain.yaml                ← website domain (contact workflow, island routing)
-agents/contact/
-  agent.yaml                 ← contact agent (validate, store, notify)
-```
 
 ## How It Works
 
@@ -70,19 +68,30 @@ agents/contact/
 4. **Domain spec** declares the workflows that handle island interactions
 5. **Agent spec** declares what the contact agent does (validate, store)
 6. **`weblisk server init`** reads specs + platform blueprint → generates server code
-7. **Gateway** serves `public/` and routes island requests to the website domain
-8. **Website domain** dispatches to the contact agent when the form is submitted
+7. **Orchestrator** registers the domain and agent, manages lifecycle
+8. **Gateway** serves `public/` and routes island requests to the website domain
+9. **Website domain** dispatches to the contact agent when the form is submitted
 
 ## The Contact Flow
 
 ```
-User fills form → Island sends to gateway
-                    → Gateway routes to website domain
+User fills form → Island sends POST to gateway (/islands/home/contact-form)
+                    → Gateway routes to website domain (port 9700)
                       → Domain triggers contact workflow
-                        → Contact agent validates + stores + notifies
+                        → Contact agent validates + stores (port 9710)
                           → Response flows back to island
                             → Island shows success message
 ```
+
+## Production Checklist
+
+Before deploying, update `.weblisk/config.yaml`:
+
+- **CORS:** Set `origins` to your production domain
+- **TLS:** Set `tls: true` or use a reverse proxy
+- **Auth:** Configure gateway auth (`token`, `session`, etc.)
+- **Storage:** Switch orchestrator `storage` from `memory` to persistent
+- **Rate limit:** Adjust `rate_limit` for expected traffic
 
 ## Going Further
 

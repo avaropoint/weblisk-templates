@@ -20,14 +20,20 @@ gateway:
   auth: none
   rate_limit: 100/min
   cors:
+    # Development: localhost only. Override in .env for production:
+    #   WL_CORS_ORIGINS=https://{{domain}}
     origins: [ "http://localhost:*" ]
-    methods: [ GET, POST ]
+    methods: [ GET, POST, OPTIONS ]
     headers: [ Content-Type, X-Request-Id ]
+    max_age: 86400
   islands:
     # Maps island requests to domain workflows.
     # When the client POSTs to /islands/home/contact-form,
     # the gateway routes it to the website domain's contact workflow.
     routing: domain
+  health:
+    endpoint: /healthz
+    include_agents: true
 
 domains:
   - name: website

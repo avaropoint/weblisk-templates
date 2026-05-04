@@ -3,6 +3,8 @@
 #
 # Client version:  protocol: none  → mailto fallback
 # Server version:  protocol: agent → routed through gateway to contact agent
+#
+# Everything else (fields, data.schema, ui, accessibility) is inherited.
 
 extends: client/starter/blueprints/islands/contact-form
 
@@ -20,6 +22,3 @@ behavior:
   reset_on_success: true
   debounce: 300ms
   optimistic: false
-  aria_label: "Contact form"
-  error_announcement: assertive
-  required_indicator: "(required)"

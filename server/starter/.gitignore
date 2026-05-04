@@ -3,8 +3,35 @@
 .weblisk/keys/
 .weblisk/token
 
-# Generated output
+# Generated client output
 public/
+
+# Generated server code (weblisk server init)
+cmd/
+internal/
+pkg/
+src/generated/
+main.go
+main.ts
+main.rs
+worker.js
+wrangler.toml
+
+# Compiled binaries
+bin/
+*.exe
+hub
+gateway
+
+# Data / storage
+data/
+*.db
+*.db-journal
+*.db-wal
+
+# Logs
+logs/
+*.log
 
 # Environment
 .env
@@ -13,6 +40,8 @@ public/
 
 # Dependencies
 node_modules/
+go.sum
+target/
 
 # OS
 .DS_Store

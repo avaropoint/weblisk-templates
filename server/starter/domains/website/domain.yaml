@@ -27,6 +27,9 @@ workflows:
           name: "$.payload.name"
           email: "$.payload.email"
           message: "$.payload.message"
+        output:
+          id: "$.result.id"
+          status: "$.result.status"
         timeout: 5000
         on_error: fail
 
